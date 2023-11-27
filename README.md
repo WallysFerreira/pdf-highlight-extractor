@@ -10,4 +10,4 @@ Extract highlights from PDF files.
 ## Pontos para tomar cuidado
 - Marcações de mais de uma linha. São a mesma marcação mas vão ter dois retangulos. Como vai manter o contexto de ser uma única marcação mas juntar o texto de duas imagens cortadas diferentes?
 - A apresentação pro usuário
-- Vai salvar uma imagem para cada página. Tem como usar a imagem sem salvar?
+- Vai salvar uma imagem para cada página. Tem como usar a imagem sem salvar? Parece que tem com tempfile
