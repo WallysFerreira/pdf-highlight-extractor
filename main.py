@@ -27,12 +27,12 @@ for numero_pagina, pagina in enumerate(leitor.pages):
                 coordenadas_cantos_retangulo = anotacao["/QuadPoints"]
 
                 if len(coordenadas_cantos_retangulo) > 8:
-                    pass
+                    print(coordenadas_cantos_retangulo)
                 else:
                     canto_esquerdo_superior = [coordenadas_cantos_retangulo[0], coordenadas_cantos_retangulo[1]]
                     canto_direito_inferior = [coordenadas_cantos_retangulo[6], coordenadas_cantos_retangulo[7]]
 
-                    anotacao_encontrada.coordenadas = [canto_esquerdo_superior, canto_direito_inferior]
+                    anotacao_encontrada.coordenadas.append([canto_esquerdo_superior, canto_direito_inferior])
                     anotacao_encontrada.pagina = numero_pagina + 1
 
                 anotacoes_encontradas.append(anotacao_encontrada)
