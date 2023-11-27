@@ -3,8 +3,7 @@ Extract highlights from PDF files.
 
 ## O que vai precisar ser feito
 - Pegar as coordenadas das marcações no PDF (PyPDF)
-- Transformar as páginas em imagem (pillow)
-- Cortar a imagem da página usando as coordenadas das marcações (pillow)
+- Transformar as páginas em imagem e cortar usando as coordenadas das marcações (pillow)
 - Pegar o texto da imagem cortada (pytesseract)
 - Mostrar para o usuario (terminal ou html)
 
