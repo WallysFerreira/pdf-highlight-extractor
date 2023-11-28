@@ -1,26 +1,25 @@
-const inputFile = document.querySelector('#file');
-const imgArea = document.querySelector('.img-area');
+window.onload = () => {
+    const inputFile = document.querySelector('#file');
 
-document.getElementById('imgArea').addEventListener('click', function() {
-    document.getElementById('file').click();
-});
+    document.getElementById('img-area').addEventListener('click', function () {
+        document.getElementById('file').click();
+    });
 
-inputFile.addEventListener('change', function () {
-    const image = this.files[0]
-    if(image.size < 2000000) {
-        const reader = new FileReader();
-        reader.onload = ()=> {
-            const allImg = imgArea.querySelectorAll('img');
-            allImg.forEach(item=> item.remove());
-            const imgUrl = reader.result;
-            const img = document.createElement('img');
-            img.src = imgUrl;
-            imgArea.appendChild(img);
-            imgArea.classList.add('active');
-            imgArea.dataset.img = image.name;
-        }
-        reader.readAsDataURL(image);
-    } else {
-        alert("Image size more than 2MB");
-    }
-})
+    inputFile.addEventListener('change', async function () {
+        const fd = new FormData()
+        fd.append('entrada.PDF', inputFile.files[0])
+
+        let res = await fetch('http://localhost:5000/extract', {
+            method: 'POST',
+            body: fd
+        })
+
+        let blob_saida = await res.blob()
+        let blobUrl = URL.createObjectURL(blob_saida)
+    
+        var botao_download = document.createElement("a")
+        botao_download.href = blobUrl
+        botao_download.download = "saida.txt"
+        botao_download.click()
+    })
+}
