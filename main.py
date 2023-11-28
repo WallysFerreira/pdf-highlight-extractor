@@ -4,6 +4,18 @@ from PIL import Image
 import tempfile
 import pytesseract
 
+def cortar_e_salvar(pagina, coords, caminho):
+    escritor = PdfWriter()
+
+    for coord in coords:
+        pagina.mediabox.upper_left = (coord[0][0], coord[0][1])
+        pagina.mediabox.lower_right = (coord[1][0], coord[1][1])
+
+        escritor.add_page(pagina)
+        escritor.write(caminho)
+        
+    escritor.close()
+
 def extrair(caminho_arquivo_entrada):
     leitor = PdfReader(caminho_arquivo_entrada)
 
@@ -55,13 +67,14 @@ def extrair(caminho_arquivo_entrada):
 
                     anotacoes_encontradas.append(anotacao_encontrada)
 
-                    for coord in anotacao_encontrada.coordenadas:
+                    cortar_e_salvar(pagina, anotacao_encontrada.coordenadas, f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
+                    """ for coord in anotacao_encontrada.coordenadas:
                         pagina.mediabox.upper_left = (coord[0][0], coord[0][1])
                         pagina.mediabox.lower_right = (coord[1][0], coord[1][1])
 
                         escritor.add_page(pagina)
                         escritor.write(f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
-
+ """
     ultima_pagina_mostrada = 0
     with open('saida.txt', 'w') as fp:
         for anotacao in anotacoes_encontradas:
@@ -84,3 +97,6 @@ def extrair(caminho_arquivo_entrada):
             fp.write(f"Anotação {anotacao.numero}\n")
             print(anotacao.texto)
             fp.write(f"{anotacao.texto}\n")
+
+
+extrair('./teste2.pdf')
