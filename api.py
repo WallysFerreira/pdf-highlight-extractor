@@ -8,8 +8,9 @@ app.config["UPLOAD_FOLDER"] = './uploads'
 def extract():
     try:
         file = request.files['entrada.PDF']
-        file.save(f'{app.config["UPLOAD_FOLDER"]}/{file.filename}')
-        extrair()
+        caminho_arquivo_entrada = f'{app.config["UPLOAD_FOLDER"]}/{file.filename}'
+        file.save(caminho_arquivo_entrada)
+        extrair(caminho_arquivo_entrada)
         return send_file('./saida.txt', download_name="marcacoes.txt")
     except Exception as e:
         return str(e)
