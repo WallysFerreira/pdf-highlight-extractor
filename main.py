@@ -61,17 +61,20 @@ for numero_pagina, pagina in enumerate(leitor.pages):
                     escritor.add_page(pagina)
                     escritor.write(f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
 
-for count, anotacao in enumerate(anotacoes_encontradas):
+ultima_pagina_mostrada = 0
+for anotacao in anotacoes_encontradas:
     imagens = convert_from_path(f'{path.name}/{anotacao.pagina}_{anotacao.numero}.pdf', output_folder=path.name)
 
-    #print("Pagina: ", anotacao.pagina)
-    #print("Numero da anotação: ", anotacao.numero)
-
-    for numero_pagina, imagem in enumerate(imagens):
+    for imagem in imagens:
         texto_extraido = pytesseract.image_to_string(imagem, lang="por").strip()
-
 
         anotacao.texto += texto_extraido
         anotacao.texto += " "
 
+    if ultima_pagina_mostrada != anotacao.pagina:
+        print()
+        print("Pagina:", anotacao.pagina)
+        ultima_pagina_mostrada = anotacao.pagina
+
+    print("Anotação:", anotacao.numero)
     print(anotacao.texto)
