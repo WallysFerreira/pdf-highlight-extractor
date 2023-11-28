@@ -46,8 +46,6 @@ for numero_pagina, pagina in enumerate(leitor.pages):
 
                 anotacoes_encontradas.append(anotacao_encontrada)
 
-
-
 with tempfile.TemporaryDirectory() as path:
     imagens = convert_from_path('/home/belval/example.pdf', output_folder=path)
     for numero_pagina, imagem in enumerate(imagens):
