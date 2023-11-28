@@ -1,4 +1,6 @@
 from pypdf import PdfReader
+from pdf2image import convert_from_path
+import tempfile
 
 leitor = PdfReader("teste.PDF")
 
@@ -44,9 +46,9 @@ for numero_pagina, pagina in enumerate(leitor.pages):
 
                 anotacoes_encontradas.append(anotacao_encontrada)
 
-import tempfile
+
 
 with tempfile.TemporaryDirectory() as path:
-    imagems = convert_from_path('/home/belval/example.pdf', output_folder=path)
-    for numero_pagina, imagem in enumerate(imagems):
+    imagens = convert_from_path('/home/belval/example.pdf', output_folder=path)
+    for numero_pagina, imagem in enumerate(imagens):
         imagem.save(f"{path}/{numero_pagina}.jpg")
