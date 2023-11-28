@@ -2,6 +2,7 @@ from pypdf import PdfReader, PdfWriter
 from pdf2image import convert_from_path
 from PIL import Image
 import tempfile
+import glob
 
 leitor = PdfReader("teste.PDF")
 
@@ -13,6 +14,7 @@ class AnotacaoEncontrada:
         self.coordenadas = []
         pass
 
+anotacoes_encontradas = []
 numero_anotacoes_encontradas = 1
 path = tempfile.TemporaryDirectory()
 
@@ -49,6 +51,8 @@ for numero_pagina, pagina in enumerate(leitor.pages):
                     canto_direito_inferior = [coordenadas_cantos_retangulo[6], coordenadas_cantos_retangulo[7]]
 
                     anotacao_encontrada.coordenadas.append([canto_esquerdo_superior, canto_direito_inferior])
+
+                anotacoes_encontradas.append(anotacao_encontrada)
 
                 for coord in anotacao_encontrada.coordenadas:
                     print(anotacao_encontrada.coordenadas)
