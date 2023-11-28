@@ -14,6 +14,7 @@ class AnotacaoEncontrada:
         pass
 
 numero_anotacoes_encontradas = 1
+path = tempfile.TemporaryDirectory()
 
 for numero_pagina, pagina in enumerate(leitor.pages):
     # Algumas páginas não tem anotação nenhuma
@@ -56,11 +57,11 @@ for numero_pagina, pagina in enumerate(leitor.pages):
                     pagina.mediabox.lower_right = (coord[1][0], coord[1][1])
 
                     escritor.add_page(pagina)
-                    escritor.write(f'{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
+                    escritor.write(f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
 
-with tempfile.TemporaryDirectory() as path:
+""" with tempfile.TemporaryDirectory() as path:
     imagens = convert_from_path('teste.PDF', output_folder=path)
 
     for numero_pagina, imagem in enumerate(imagens):
         imagem.save(f"{path}/{numero_pagina}.jpg")
-
+ """
