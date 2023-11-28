@@ -1,10 +1,12 @@
 from flask import Flask, send_file, request
+from flask_cors import CORS
 from main import extrair
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = './uploads'
+CORS(app)
 
-@app.route('/extract')
+@app.route('/extract', methods=['POST'])
 def extract():
     try:
         file = request.files['entrada.PDF']
