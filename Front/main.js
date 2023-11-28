@@ -1,26 +1,33 @@
-const inputFile = document.querySelector('#file');
-const imgArea = document.querySelector('.img-area');
+const inputFile = document.querySelector("#file");
+const imgArea = document.querySelector(".img-area");
+const pictureImageTxt = "Carregue o Arquivo";
 
-document.getElementById('imgArea').addEventListener('click', function() {
-    document.getElementById('file').click();
+document.querySelector('.icon').addEventListener('click', function() {
+    inputFile.click();
 });
 
-inputFile.addEventListener('change', function () {
-    const image = this.files[0]
-    if(image.size < 2000000) {
-        const reader = new FileReader();
-        reader.onload = ()=> {
-            const allImg = imgArea.querySelectorAll('img');
-            allImg.forEach(item=> item.remove());
-            const imgUrl = reader.result;
-            const img = document.createElement('img');
-            img.src = imgUrl;
-            imgArea.appendChild(img);
-            imgArea.classList.add('active');
-            imgArea.dataset.img = image.name;
-        }
-        reader.readAsDataURL(image);
-    } else {
-        alert("Image size more than 2MB");
-    }
-})
+inputFile.addEventListener("change", function (e) {
+  const inputTarget = e.target;
+  const file = inputTarget.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function (e) {
+      const readerTarget = e.target;
+
+      const object = document.createElement('object');
+      object.data = readerTarget.result;
+      object.width = "500";
+      object.height = "500";
+      object.type = "application/pdf";
+
+      imgArea.innerHTML = "";
+      imgArea.appendChild(object);
+    });
+
+    reader.readAsDataURL(file);
+  } else {
+    imgArea.innerHTML = pictureImageTxt;
+  }
+});
