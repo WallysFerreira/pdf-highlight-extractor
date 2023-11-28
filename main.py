@@ -2,17 +2,19 @@ from pypdf import PdfReader, PdfWriter
 from pdf2image import convert_from_path
 from PIL import Image
 import tempfile
+import pytesseract
 
 leitor = PdfReader("teste.PDF")
 
 class AnotacaoEncontrada:
     def __init__(self) -> None:
-        self.text = ""
+        self.texto = ""
         self.pagina = 0
         self.numero = 0
         self.coordenadas = []
         pass
 
+anotacoes_encontradas = []
 numero_anotacoes_encontradas = 1
 path = tempfile.TemporaryDirectory()
 
@@ -50,18 +52,26 @@ for numero_pagina, pagina in enumerate(leitor.pages):
 
                     anotacao_encontrada.coordenadas.append([canto_esquerdo_superior, canto_direito_inferior])
 
+                anotacoes_encontradas.append(anotacao_encontrada)
+
                 for coord in anotacao_encontrada.coordenadas:
-                    print(anotacao_encontrada.coordenadas)
-                    print(coord)
                     pagina.mediabox.upper_left = (coord[0][0], coord[0][1])
                     pagina.mediabox.lower_right = (coord[1][0], coord[1][1])
 
                     escritor.add_page(pagina)
                     escritor.write(f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
 
-""" with tempfile.TemporaryDirectory() as path:
-    imagens = convert_from_path('teste.PDF', output_folder=path)
+for count, anotacao in enumerate(anotacoes_encontradas):
+    imagens = convert_from_path(f'{path.name}/{anotacao.pagina}_{anotacao.numero}.pdf', output_folder=path.name)
+
+    #print("Pagina: ", anotacao.pagina)
+    #print("Numero da anotação: ", anotacao.numero)
 
     for numero_pagina, imagem in enumerate(imagens):
-        imagem.save(f"{path}/{numero_pagina}.jpg")
- """
+        texto_extraido = pytesseract.image_to_string(imagem, lang="por").strip()
+
+
+        anotacao.texto += texto_extraido
+        anotacao.texto += " "
+
+    print(anotacao.texto)
