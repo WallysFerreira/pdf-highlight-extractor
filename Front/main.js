@@ -9,7 +9,7 @@ window.onload = () => {
         const fd = new FormData()
         fd.append('entrada.PDF', inputFile.files[0])
 
-        let res = await fetch('http://localhost:5000/extract', {
+        let res = await fetch('https://pdf-highlight-extractor-api.onrender.com/extract', {
             method: 'POST',
             body: fd
         })
