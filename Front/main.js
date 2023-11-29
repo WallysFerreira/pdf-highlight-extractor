@@ -1,8 +1,7 @@
-
 const inputFile = document.querySelector("#file");
 const imgArea = document.querySelector(".img-area");
 const pictureImageTxt = "Carregue o Arquivo";
-const progressBar = document.querySelector("#progress-bar"); // Add uma barra de progresso no seu HTML
+const progressBar = document.querySelector("#progress-bar"); // Adduma barra de progresso no seu HTML
 const progressText = document.querySelector("#progress-text"); // Add um elemento de texto para mostrar o progresso
 
 document.querySelector('.icon').addEventListener('click', function() {
@@ -37,23 +36,22 @@ inputFile.addEventListener("change", function (e) {
       }
     });
 
-    reader.addEventListener("loadend", function () {
-      // Envia o arquivo para a API dps do carregamento
-      const formData = new FormData();
-      formData.append('file', file);
+    reader.addEventListener("loadend", async function () {
+      const fd = new FormData();
+      fd.append('entrada.PDF', inputFile.files[0]); // carregamento aqui 
 
-      fetch('https://pdf-highlight-extractor-api.onrender.com/extract', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => { //correção aqui, aqui processa a resposta da api
-        console.log(data);
-        // Processa a resposta da API aqui
-      })
-      .catch(error => {
-        console.error('Error:', error);
+      let res = await fetch('https://pdf-highlight-extractor-api.onrender.com/extract', {
+          method: 'POST',
+          body: fd
       });
+
+      let blob_saida = await res.blob();
+      let blobUrl = URL.createObjectURL(blob_saida);
+
+      var botao_download = document.createElement("a");
+      botao_download.href = blobUrl;
+      botao_download.download = "saida.txt";
+      botao_download.click();
     });
 
     reader.readAsDataURL(file);
