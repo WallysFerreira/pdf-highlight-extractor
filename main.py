@@ -39,7 +39,7 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
     print("Entrada:", caminho_arquivo_entrada)
     print("Saida:", caminho_arquivo_saida)
     leitor = PdfReader(caminho_arquivo_entrada)
-    arquivo_saida = open(caminho_arquivo_saida, 'w')
+    arquivo_saida = open(caminho_arquivo_saida, 'w+')
     ultima_pagina_mostrada = 0
     numero_anotacoes_encontradas = 1
     path = tempfile.TemporaryDirectory()
