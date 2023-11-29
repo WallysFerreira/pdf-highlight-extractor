@@ -6,10 +6,6 @@ import tempfile
 import threading
 import pytesseract
 
-# Variaveis globais
-anotacoes_encontradas = []
-paginas_pdf = []
-
 def cortar_e_salvar(pagina, coords, caminho):
     escritor = PdfWriter()
 
@@ -30,8 +26,12 @@ class AnotacaoEncontrada:
         self.coordenadas = []
 
 def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
+    anotacoes_encontradas = []
+    paginas_pdf = []
+    print("Entrada:", caminho_arquivo_entrada)
+    print("Saida:", caminho_arquivo_saida)
     leitor = PdfReader(caminho_arquivo_entrada)
-    arquivo_saida = open('saida.txt', 'w')
+    arquivo_saida = open(caminho_arquivo_saida, 'w')
     ultima_pagina_mostrada = 0
     numero_anotacoes_encontradas = 1
     path = tempfile.TemporaryDirectory()
@@ -48,7 +48,6 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
 
                 # A anotação só é valida se tiver o campo QuadPoints
                 if "/QuadPoints" in anotacao:
-                    escritor = PdfWriter()
                     coordenadas_cantos_retangulo = anotacao["/QuadPoints"]
                     anotacao_encontrada = AnotacaoEncontrada()
                     anotacao_encontrada.pagina = numero_pagina + 1
@@ -86,15 +85,13 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
             anotacao_encontrada.texto += " "
 
         if ultima_pagina_mostrada != anotacao_encontrada.pagina:
-            print()
+            #print()
             arquivo_saida.write("\n")
-            print("Pagina", anotacao_encontrada.pagina)
+            #print("Pagina", anotacao_encontrada.pagina)
             arquivo_saida.write(f"Pagina {anotacao_encontrada.pagina}\n" )
             ultima_pagina_mostrada = anotacao_encontrada.pagina
 
-        print("Anotação", anotacao_encontrada.numero)
+        #print("Anotação", anotacao_encontrada.numero)
         arquivo_saida.write(f"Anotação {anotacao_encontrada.numero}\n")
-        print(anotacao_encontrada.texto)
+        #print(anotacao_encontrada.texto)
         arquivo_saida.write(f"{anotacao_encontrada.texto}\n")
-
-extrair('./teste2.pdf', './saida.txt')
