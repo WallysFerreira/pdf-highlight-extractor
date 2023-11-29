@@ -9,12 +9,12 @@
 
 body {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	background: #5f9ea0;
 }
-
 
 .container {
 	max-width: 400px;
@@ -22,7 +22,9 @@ body {
 	background: #fff;
 	padding: 30px;
 	border-radius: 30px;
+	margin-bottom: 20px; /* Add margem inferior para separar do progress-bar */
 }
+
 .img-area {
 	position: relative;
 	width: 100%;
@@ -36,20 +38,25 @@ body {
 	align-items: center;
 	flex-direction: column;
 }
+
 .img-area .icon {
 	font-size: 100px;
 }
+
 .img-area h3 {
 	font-size: 20px;
 	font-weight: 500;
 	margin-bottom: 6px;
 }
+
 .img-area p {
 	color: #999;
 }
+
 .img-area p span {
 	font-weight: 600;
 }
+
 .img-area img {
 	position: absolute;
 	top: 0;
@@ -60,6 +67,7 @@ body {
 	object-position: center;
 	z-index: 100;
 }
+
 .img-area::before {
 	content: attr(data-img);
 	position: absolute;
@@ -79,9 +87,11 @@ body {
 	transition: all .3s ease;
 	z-index: 200;
 }
+
 .img-area.active:hover::before {
 	opacity: 1;
 }
+
 .select-image {
 	display: block;
 	width: 100%;
@@ -95,6 +105,13 @@ body {
 	cursor: pointer;
 	transition: all .3s ease;
 }
+
 .select-image:hover {
 	background: var(--dark-blue);
 }
+
+
+#barra :-webkit-progress-value {
+		background-color: #5f9ea0;
+		border-radius: 10px;
+	}
