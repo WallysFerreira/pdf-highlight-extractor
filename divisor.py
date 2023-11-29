@@ -1,11 +1,12 @@
 import tempfile
 import concurrent.futures 
+import os
 from pypdf import PdfReader, PdfWriter 
 from main import extrair
 
 with tempfile.TemporaryDirectory() as path:
-    leitor = PdfReader("teste.PDF")
-    caminhos_saida = ["primeira_parte", "segunda_parte", "terceira_parte", "quarta_parte"]
+    leitor = PdfReader("teste2.pdf")
+    caminhos_saida = [f"{path}/primeira_parte", f"{path}/segunda_parte", f"{path}/terceira_parte", f"{path}/quarta_parte"]
     escritor1 = PdfWriter()
     escritor2 = PdfWriter()
     escritor3 = PdfWriter()
@@ -35,8 +36,9 @@ with tempfile.TemporaryDirectory() as path:
     else:
         extrair(f'{caminhos_saida[0]}.pdf', f'{caminhos_saida[0]}.txt')
     
-    with open('anotacoes.txt', 'w') as arquivo_saida:
+    with open(f'anotacoes.txt', 'w') as arquivo_saida:
         for arquivo in caminhos_saida:
-            with open(f'{arquivo}.txt') as fragmento:
-                arquivo_saida.write(fragmento.read())
+            if os.path.isfile(f'{arquivo}.txt'):
+                with open(f'{arquivo}.txt', "r") as fragmento:
+                    arquivo_saida.write(fragmento.read())
 
