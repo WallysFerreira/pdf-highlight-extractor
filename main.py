@@ -3,7 +3,6 @@ from pypdf import PdfReader, PdfWriter
 from pdf2image import convert_from_path
 from PIL import Image
 import tempfile
-import threading
 import pytesseract
 
 def cortar_e_salvar(pagina, coords, caminho):
