@@ -1,3 +1,4 @@
+
 const inputFile = document.querySelector("#file");
 const imgArea = document.querySelector(".img-area");
 const pictureImageTxt = "Carregue o Arquivo";

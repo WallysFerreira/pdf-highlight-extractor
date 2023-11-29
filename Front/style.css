@@ -48,7 +48,7 @@ body {
 	font-weight: 500;
 	margin-bottom: 6px;
 }
-
+  
 .img-area p {
 	color: #999;
 }
@@ -67,6 +67,7 @@ body {
 	object-position: center;
 	z-index: 100;
 }
+
 
 .img-area::before {
 	content: attr(data-img);
