@@ -1,0 +1,265 @@
+%PDF-1.3
+%‚„œ”
+
+1 0 obj
+<<
+/Type /Catalog
+/Outlines 2 0 R
+/Pages 3 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Outlines
+/Count 0
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 6 0 R ] 
+>>
+endobj
+
+4 0 obj
+<<
+/Type /Page
+/Parent 3 0 R
+/Resources <<
+/Font <<
+/F1 9 0 R 
+>>
+/ProcSet 8 0 R
+>>
+/MediaBox [0 0 612.0000 792.0000]
+/Contents 5 0 R
+>>
+endobj
+
+5 0 obj
+<< /Length 1074 >>
+stream
+2 J
+BT
+0 0 0 rg
+/F1 0027 Tf
+57.3750 722.2800 Td
+( A Simple PDF File ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 688.6080 Td
+( This is a small demonstration .pdf file - ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 664.7040 Td
+( just for use in the Virtual Mechanics tutorials. More text. And more ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 652.7520 Td
+( text. And more text. And more text. And more text. ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 628.8480 Td
+( And more text. And more text. And more text. And more text. And more ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 616.8960 Td
+( text. And more text. Boring, zzzzz. And more text. And more text. And ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 604.9440 Td
+( more text. And more text. And more text. And more text. And more text. ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 592.9920 Td
+( And more text. And more text. ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 569.0880 Td
+( And more text. And more text. And more text. And more text. And more ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 557.1360 Td
+( text. And more text. And more text. Even more. Continued on page 2 ...) Tj
+ET
+endstream
+endobj
+
+6 0 obj
+<<
+/Type /Page
+/Parent 3 0 R
+/Resources <<
+/Font <<
+/F1 9 0 R 
+>>
+/ProcSet 8 0 R
+>>
+/MediaBox [0 0 612.0000 792.0000]
+/Contents 7 0 R
+>>
+endobj
+
+7 0 obj
+<< /Length 676 >>
+stream
+2 J
+BT
+0 0 0 rg
+/F1 0027 Tf
+57.3750 722.2800 Td
+( Simple PDF File 2 ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 688.6080 Td
+( ...continued from page 1. Yet more text. And more text. And more text. ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 676.6560 Td
+( And more text. And more text. And more text. And more text. And more ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 664.7040 Td
+( text. Oh, how boring typing this stuff. But not as boring as watching ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 652.7520 Td
+( paint dry. And more text. And more text. And more text. And more text. ) Tj
+ET
+BT
+/F1 0010 Tf
+69.2500 640.8000 Td
+( Boring.  More, a little more text. The end, and just as well. ) Tj
+ET
+endstream
+endobj
+
+8 0 obj
+[/PDF /Text]
+endobj
+
+9 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+endobj
+
+10 0 obj
+<<
+/Creator (Rave \(http://www.nevrona.com/rave\))
+/Producer (Nevrona Designs)
+/CreationDate (D:20060301072826)
+>>
+endobj
+
+xref
+0 11
+0000000000 65535 f
+0000000019 00000 n
+0000000093 00000 n
+0000000147 00000 n
+0000000222 00000 n
+0000000390 00000 n
+0000001522 00000 n
+0000001690 00000 n
+0000002423 00000 n
+0000002456 00000 n
+0000002574 00000 n
+
+trailer
+<<
+/Size 11
+/Root 1 0 R
+/Info 10 0 R
+>>
+
+startxref
+2714
+%%EOF
+4 0 obj
+<</Type /Page /Parent 3 0 R /Resources <</Font <</F1 9 0 R >> /ProcSet 8 0 R >> /MediaBox [0 0 612 792 ] /Contents 5 0 R /Annots 13 0 R >> 
+endobj
+6 0 obj
+<</Type /Page /Parent 3 0 R /Resources <</Font <</F1 9 0 R >> /ProcSet 8 0 R >> /MediaBox [0 0 612 792 ] /Contents 7 0 R /Annots 16 0 R >> 
+endobj
+11 0 obj
+<</Type /Annot /Rect [139 625 338 638 ] /Subtype /Highlight /QuadPoints [139 638 338 638 139 625 338 625 ] /M (D:20231128203929-03'00') /C [1 1 0 ] /Popup 12 0 R /T <feff00570061006c006c00790073002000530069006c00760061> /P 4 0 R >> 
+endobj
+12 0 obj
+<</Type /Annot /Rect [338.9447222222 483.0909567901 538.9447222222 633.0909567901 ] /Subtype /Popup /M (D:20231128203929-03'00') /Parent 11 0 R /P 4 0 R >> 
+endobj
+13 0 obj
+[11 0 R 12 0 R 19 0 R 20 0 R 21 0 R 22 0 R ] 
+endobj
+14 0 obj
+<</Type /Annot /Rect [109 637 328 650 ] /Subtype /Highlight /QuadPoints [109 650 328 650 109 637 328 637 ] /M (D:20231128204053-03'00') /C [1 1 0 ] /Popup 15 0 R /T <feff00570061006c006c00790073002000530069006c00760061> /P 6 0 R >> 
+endobj
+15 0 obj
+<</Type /Annot /Rect [326.0850308642 497.7877469136 526.0850308642 647.7877469136 ] /Subtype /Popup /M (D:20231128204053-03'00') /Parent 14 0 R /P 6 0 R >> 
+endobj
+16 0 obj
+[14 0 R 15 0 R 17 0 R 18 0 R ] 
+endobj
+17 0 obj
+<</Type /Annot /Rect [72 661 387 685 ] /Subtype /Highlight /QuadPoints [343 685 387 685 343 674 387 674 72 674 91 674 72 673 91 673 343 674 387 674 343 673 387 673 72 673 91 673 72 661 91 661 ] /M (D:20231128204101-03'00') /C [1 1 0 ] /Popup 18 0 R /T <feff00570061006c006c00790073002000530069006c00760061> /P 6 0 R >> 
+endobj
+18 0 obj
+<</Type /Annot /Rect [91.8549382716 520.7514814815 291.8549382716 670.7514814815 ] /Subtype /Popup /M (D:20231128204101-03'00') /Parent 17 0 R /P 6 0 R >> 
+endobj
+19 0 obj
+<</Type /Annot /Rect [72 565 203 578 ] /Subtype /Highlight /QuadPoints [72 578 203 578 72 565 203 565 ] /M (D:20231128204107-03'00') /C [1 1 0 ] /Popup 20 0 R /T <feff00570061006c006c00790073002000530069006c00760061> /P 4 0 R >> 
+endobj
+20 0 obj
+<</Type /Annot /Rect [201.1623148148 423.3852469136 401.1623148148 573.3852469136 ] /Subtype /Popup /M (D:20231128204107-03'00') /Parent 19 0 R /P 4 0 R >> 
+endobj
+21 0 obj
+<</Type /Annot /Rect [72 685 237 697 ] /Subtype /Highlight /QuadPoints [72 697 237 697 72 685 237 685 ] /M (D:20231128204112-03'00') /C [1 1 0 ] /Popup 22 0 R /T <feff00570061006c006c00790073002000530069006c00760061> /P 4 0 R >> 
+endobj
+22 0 obj
+<</Type /Annot /Rect [236.067191358 539.1224691358 436.067191358 689.1224691358 ] /Subtype /Popup /M (D:20231128204112-03'00') /Parent 21 0 R /P 4 0 R >> 
+endobj
+xref
+0 1
+0000000001 65535 f
+4 1
+0000003028 00000 n
+6 1
+0000003186 00000 n
+11 12
+0000003344 00000 n
+0000003596 00000 n
+0000003772 00000 n
+0000003837 00000 n
+0000004089 00000 n
+0000004265 00000 n
+0000004316 00000 n
+0000004655 00000 n
+0000004830 00000 n
+0000005079 00000 n
+0000005255 00000 n
+0000005504 00000 n
+trailer
+<</Size 23 /Root 1 0 R /Prev 2714 /Info 10 0 R >> 
+startxref
+5678
+%%EOF
