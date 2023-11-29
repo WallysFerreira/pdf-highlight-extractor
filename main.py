@@ -1,4 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor
+import concurrent.futures
 from pypdf import PdfReader, PdfWriter
 from pdf2image import convert_from_path
 from PIL import Image
@@ -17,6 +17,15 @@ def cortar_e_salvar(pagina, coords, caminho):
         escritor.write(caminho)
         
     escritor.close()
+
+def extrair_texto(anotacao, pasta):
+    imagens = convert_from_path(f'{pasta}/{anotacao.pagina}_{anotacao.numero}.pdf', output_folder=pasta)
+
+    for imagem in imagens:
+        texto_extraido = pytesseract.image_to_string(imagem, "por").strip()
+
+        anotacao.texto += texto_extraido
+        anotacao.texto += " "
 
 class AnotacaoEncontrada:
     def __init__(self) -> None:
@@ -73,17 +82,25 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
 
                     anotacoes_encontradas.append(anotacao_encontrada)
 
+    print("Terminou de procurar anotações")
+
     for anotacao_encontrada in anotacoes_encontradas:
         cortar_e_salvar(paginas_pdf[anotacao_encontrada.pagina - 1], anotacao_encontrada.coordenadas, f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
 
-        imagens = convert_from_path(f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf', output_folder=path.name)
+    print("Terminou de cortar")
 
-        for imagem in imagens:
-            texto_extraido = pytesseract.image_to_string(imagem, "por").strip()
+    with concurrent.futures.ThreadPoolExecutor(2) as pool:
+        futures = [pool.submit(extrair_texto, anotacao, path.name) for anotacao in anotacoes_encontradas]
+        concurrent.futures.wait(futures)
 
-            anotacao_encontrada.texto += texto_extraido
-            anotacao_encontrada.texto += " "
+    """"
+    for anotacao_encontrada in anotacoes_encontradas:
+        extrair_texto(anotacao_encontrada, path.name)
+    """
 
+    print("Terminou de extrair o texto")
+
+    for anotacao_encontrada in anotacoes_encontradas:
         if ultima_pagina_mostrada != anotacao_encontrada.pagina:
             #print()
             arquivo_saida.write("\n")
@@ -95,3 +112,5 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
         arquivo_saida.write(f"Anotação {anotacao_encontrada.numero}\n")
         #print(anotacao_encontrada.texto)
         arquivo_saida.write(f"{anotacao_encontrada.texto}\n")
+
+    print("Terminou de escrever anotações")
