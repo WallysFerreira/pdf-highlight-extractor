@@ -112,7 +112,9 @@ body {
 }
 
 
-#barra :-webkit-progress-value {
+#progress-bar :-webkit-progress-value {
 		background-color: #5f9ea0;
 		border-radius: 10px;
+		width: 500px;
+		height: 20;
 	}
