@@ -9,12 +9,12 @@
 
 body {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	background: #5f9ea0;
 }
-
 
 .container {
 	max-width: 400px;
@@ -22,8 +22,10 @@ body {
 	background: #fff;
 	padding: 30px;
 	border-radius: 30px;
+	margin-bottom: 20px; /* Add margem inferior para separar do progress-bar */
 }
-#img-area {
+
+.img-area {
 	position: relative;
 	width: 100%;
 	height: 240px;
@@ -36,25 +38,26 @@ body {
 	align-items: center;
 	flex-direction: column;
 }
-#img-area .icon {
+
+.img-area .icon {
 	font-size: 100px;
 }
 
-#img-area h3 {
+.img-area h3 {
 	font-size: 20px;
 	font-weight: 500;
 	margin-bottom: 6px;
 }
-
-#img-area p {
+  
+.img-area p {
 	color: #999;
 }
 
-#img-area p span {
+.img-area p span {
 	font-weight: 600;
 }
 
-#img-area img {
+.img-area img {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -65,7 +68,8 @@ body {
 	z-index: 100;
 }
 
-#img-area::before {
+
+.img-area::before {
 	content: attr(data-img);
 	position: absolute;
 	top: 0;
@@ -85,11 +89,11 @@ body {
 	z-index: 200;
 }
 
-#img-area.active:hover::before {
+.img-area.active:hover::before {
 	opacity: 1;
 }
 
-#select-image {
+.select-image {
 	display: block;
 	width: 100%;
 	padding: 16px 0;
@@ -103,6 +107,12 @@ body {
 	transition: all .3s ease;
 }
 
-#select-image:hover {
+.select-image:hover {
 	background: var(--dark-blue);
 }
+
+
+#barra :-webkit-progress-value {
+		background-color: #5f9ea0;
+		border-radius: 10px;
+	}

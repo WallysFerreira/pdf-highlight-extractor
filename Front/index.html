@@ -9,10 +9,15 @@
 </head>
 <body>
 	<div class="container">
-		<input type="file" id="file" accept=".pdf" hidden>
-		<div id="img-area" data-img="">
+		<input type="file" id="file" accept="application/pdf" hidden>
+		<div class="img-area">
 			<i class='bx bxs-cloud-upload icon'></i>
-			<h3>Carregue o Arquivo</h3>
+            <h3 > Highlight Extractor </h3>
+		</div>
+
+		<div class="barra" align="center">
+			<p id="progress-text"></p>
+			<progress id="progress-bar" value="0" max="100"></progress>
 		</div>
 	</div>
 </body>
