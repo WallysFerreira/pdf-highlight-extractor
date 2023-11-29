@@ -4,7 +4,7 @@ from pypdf import PdfReader, PdfWriter
 from main import extrair
 
 with tempfile.TemporaryDirectory() as path:
-    leitor = PdfReader("teste2.pdf")
+    leitor = PdfReader("teste.PDF")
     caminhos_saida = ["primeira_parte", "segunda_parte", "terceira_parte", "quarta_parte"]
     escritor1 = PdfWriter()
     escritor2 = PdfWriter()
@@ -34,3 +34,9 @@ with tempfile.TemporaryDirectory() as path:
             concurrent.futures.wait(futures)
     else:
         extrair(f'{caminhos_saida[0]}.pdf', f'{caminhos_saida[0]}.txt')
+    
+    with open('anotacoes.txt', 'w') as arquivo_saida:
+        for arquivo in caminhos_saida:
+            with open(f'{arquivo}.txt') as fragmento:
+                arquivo_saida.write(fragmento.read())
+
