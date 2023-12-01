@@ -1,17 +1,14 @@
-import concurrent.futures
 from pypdf import PdfReader, PdfWriter
-from pdf2image import convert_from_path
-from PIL import Image
 import tempfile
-import pytesseract
+import tabula
 
 def converter_coordenadas_para_tabula(coords, altura_pagina):
     padding = 2
 
     x1 = coords[0] - padding
-    y1 = altura_pagina - coords[3]
+    y1 = altura_pagina - coords[1]
     x2 = coords[2] + padding
-    y2 = altura_pagina - coords[1]
+    y2 = altura_pagina - coords[3]
 
     return [y1, x1, y2, x2]
 
@@ -76,7 +73,14 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
     for anotacao in anotacoes_encontradas:
         for coord in anotacao.coordenadas:
             area = converter_coordenadas_para_tabula([coord[0][0], coord[0][1], coord[1][0], coord[1][1]], altura_pagina)
-            print(area)
+
+            linhas_extraidas = tabula.read_pdf(caminho_arquivo_entrada, area=area, pages=anotacao.pagina)
+
+            for linha in linhas_extraidas:
+                texto_extraido = linha.columns[0]
+
+                anotacao.texto += texto_extraido
+                anotacao.texto += " "
 
     print("Terminou de extrair o texto")
 
@@ -94,5 +98,3 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
         arquivo_saida.write(f"{anotacao_encontrada.texto}\n")
 
     print("Terminou de escrever anotações")
-
-extrair('arquivos_teste/teste1.pdf', 'anotacoes.txt')
