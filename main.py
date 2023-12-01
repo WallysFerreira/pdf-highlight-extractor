@@ -5,6 +5,18 @@ from PIL import Image
 import tempfile
 import pytesseract
 
+altura_pagina = 0
+
+def converter_coordenadas_para_tabula(coords):
+    padding = 2
+
+    x1 = coords[0] - padding
+    y1 = altura_pagina - coords[3]
+    x2 = coords[2] + padding
+    y2 = altura_pagina - coords[1]
+
+    return [y1, x1, y2, x2]
+
 def cortar_e_salvar(pagina, coords, caminho):
     escritor = PdfWriter()
 
@@ -39,6 +51,7 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
     print("Entrada:", caminho_arquivo_entrada)
     print("Saida:", caminho_arquivo_saida)
     leitor = PdfReader(caminho_arquivo_entrada)
+    altura_pagina = leitor.pages[0].mediabox.height
     arquivo_saida = open(caminho_arquivo_saida, 'w+')
     ultima_pagina_mostrada = 0
     numero_anotacoes_encontradas = 1
