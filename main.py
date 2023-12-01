@@ -5,9 +5,7 @@ from PIL import Image
 import tempfile
 import pytesseract
 
-altura_pagina = 0
-
-def converter_coordenadas_para_tabula(coords):
+def converter_coordenadas_para_tabula(coords, altura_pagina):
     padding = 2
 
     x1 = coords[0] - padding
@@ -74,6 +72,11 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
                     anotacoes_encontradas.append(anotacao_encontrada)
 
     print("Terminou de procurar anotações")
+
+    for anotacao in anotacoes_encontradas:
+        for coord in anotacao.coordenadas:
+            area = converter_coordenadas_para_tabula([coord[0][0], coord[0][1], coord[1][0], coord[1][1]], altura_pagina)
+            print(area)
 
     print("Terminou de extrair o texto")
 
