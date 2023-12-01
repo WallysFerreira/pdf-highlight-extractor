@@ -1,3 +1,4 @@
+import multiprocessing
 from flask import Flask, send_file, request
 from flask_cors import CORS
 from main import extrair
@@ -8,7 +9,7 @@ CORS(app)
 
 @app.route('/')
 def health_check():
-    return "Healthy", 200
+    return f"Threads: {multiprocessing.cpu_count()}", 200
 
 @app.route('/extract', methods=['POST'])
 def extract():
