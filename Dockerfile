@@ -16,5 +16,5 @@ RUN conda install --yes -c conda-forge jpype1
 
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
-ENTRYPOINT ["gunicorn", "api:app", "--timeout", "0"]
+EXPOSE 10000
+ENTRYPOINT ["gunicorn", "api:app", "-b", ":10000", "--timeout", "0"]
