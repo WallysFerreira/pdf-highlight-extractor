@@ -1,30 +1,16 @@
-import concurrent.futures
 from pypdf import PdfReader, PdfWriter
-from pdf2image import convert_from_path
-from PIL import Image
 import tempfile
-import pytesseract
+import tabula
 
-def cortar_e_salvar(pagina, coords, caminho):
-    escritor = PdfWriter()
+def converter_coordenadas_para_tabula(coords, altura_pagina):
+    padding = 2
 
-    for coord in coords:
-        pagina.mediabox.upper_left = (coord[0][0], coord[0][1])
-        pagina.mediabox.lower_right = (coord[1][0], coord[1][1])
+    x1 = coords[0] - padding
+    y1 = altura_pagina - coords[1]
+    x2 = coords[2] + padding
+    y2 = altura_pagina - coords[3]
 
-        escritor.add_page(pagina)
-        escritor.write(caminho)
-        
-    escritor.close()
-
-def extrair_texto(anotacao, pasta):
-    imagens = convert_from_path(f'{pasta}/{anotacao.pagina}_{anotacao.numero}.pdf', output_folder=pasta)
-
-    for imagem in imagens:
-        texto_extraido = pytesseract.image_to_string(imagem, "por").strip()
-
-        anotacao.texto += texto_extraido
-        anotacao.texto += " "
+    return [y1, x1, y2, x2]
 
 class AnotacaoEncontrada:
     def __init__(self) -> None:
@@ -39,6 +25,7 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
     print("Entrada:", caminho_arquivo_entrada)
     print("Saida:", caminho_arquivo_saida)
     leitor = PdfReader(caminho_arquivo_entrada)
+    altura_pagina = leitor.pages[0].mediabox.height
     arquivo_saida = open(caminho_arquivo_saida, 'w+')
     ultima_pagina_mostrada = 0
     numero_anotacoes_encontradas = 1
@@ -83,19 +70,17 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
 
     print("Terminou de procurar anotações")
 
-    for anotacao_encontrada in anotacoes_encontradas:
-        cortar_e_salvar(paginas_pdf[anotacao_encontrada.pagina - 1], anotacao_encontrada.coordenadas, f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
+    for anotacao in anotacoes_encontradas:
+        for coord in anotacao.coordenadas:
+            area = converter_coordenadas_para_tabula([coord[0][0], coord[0][1], coord[1][0], coord[1][1]], altura_pagina)
 
-    print("Terminou de cortar")
+            linhas_extraidas = tabula.read_pdf(caminho_arquivo_entrada, area=area, pages=anotacao.pagina)
 
-    with concurrent.futures.ThreadPoolExecutor(2) as pool:
-        futures = [pool.submit(extrair_texto, anotacao, path.name) for anotacao in anotacoes_encontradas]
-        concurrent.futures.wait(futures)
+            for linha in linhas_extraidas:
+                texto_extraido = linha.columns[0]
 
-    """"
-    for anotacao_encontrada in anotacoes_encontradas:
-        extrair_texto(anotacao_encontrada, path.name)
-    """
+                anotacao.texto += texto_extraido
+                anotacao.texto += " "
 
     print("Terminou de extrair o texto")
 
