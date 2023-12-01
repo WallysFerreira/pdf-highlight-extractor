@@ -1,4 +1,5 @@
 from pypdf import PdfReader, PdfWriter
+import concurrent.futures
 import tempfile
 import tabula
 
@@ -11,6 +12,19 @@ def converter_coordenadas_para_tabula(coords, altura_pagina):
     y2 = altura_pagina - coords[3]
 
     return [y1, x1, y2, x2]
+
+def extrair_texto(anotacao, caminho_pdf, altura_pagina):
+    for coord in anotacao.coordenadas:
+        area = converter_coordenadas_para_tabula([coord[0][0], coord[0][1], coord[1][0], coord[1][1]], altura_pagina)
+
+        linhas_extraidas = tabula.read_pdf(caminho_pdf, area=area, pages=anotacao.pagina)
+
+        for linha in linhas_extraidas:
+            texto_extraido = linha.columns[0]
+
+            anotacao.texto += texto_extraido
+            anotacao.texto += " "
+
 
 class AnotacaoEncontrada:
     def __init__(self) -> None:
@@ -70,17 +84,9 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
 
     print("Terminou de procurar anotações")
 
-    for anotacao in anotacoes_encontradas:
-        for coord in anotacao.coordenadas:
-            area = converter_coordenadas_para_tabula([coord[0][0], coord[0][1], coord[1][0], coord[1][1]], altura_pagina)
-
-            linhas_extraidas = tabula.read_pdf(caminho_arquivo_entrada, area=area, pages=anotacao.pagina)
-
-            for linha in linhas_extraidas:
-                texto_extraido = linha.columns[0]
-
-                anotacao.texto += texto_extraido
-                anotacao.texto += " "
+    with concurrent.futures.ThreadPoolExecutor() as pool:
+        futures = [pool.submit(extrair_texto, anotacao, caminho_arquivo_entrada, altura_pagina) for anotacao in anotacoes_encontradas]
+        concurrent.futures.wait(futures)
 
     print("Terminou de extrair o texto")
 
