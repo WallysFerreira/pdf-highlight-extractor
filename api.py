@@ -6,6 +6,10 @@ app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = './uploads'
 CORS(app)
 
+@app.route('/')
+def health_check():
+    return "Healthy", 200
+
 @app.route('/extract', methods=['POST'])
 def extract():
     try:
