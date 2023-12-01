@@ -17,27 +17,6 @@ def converter_coordenadas_para_tabula(coords):
 
     return [y1, x1, y2, x2]
 
-def cortar_e_salvar(pagina, coords, caminho):
-    escritor = PdfWriter()
-
-    for coord in coords:
-        pagina.mediabox.upper_left = (coord[0][0], coord[0][1])
-        pagina.mediabox.lower_right = (coord[1][0], coord[1][1])
-
-        escritor.add_page(pagina)
-        escritor.write(caminho)
-        
-    escritor.close()
-
-def extrair_texto(anotacao, pasta):
-    imagens = convert_from_path(f'{pasta}/{anotacao.pagina}_{anotacao.numero}.pdf', output_folder=pasta)
-
-    for imagem in imagens:
-        texto_extraido = pytesseract.image_to_string(imagem, "por").strip()
-
-        anotacao.texto += texto_extraido
-        anotacao.texto += " "
-
 class AnotacaoEncontrada:
     def __init__(self) -> None:
         self.texto = ""
@@ -96,20 +75,6 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
 
     print("Terminou de procurar anotações")
 
-    for anotacao_encontrada in anotacoes_encontradas:
-        cortar_e_salvar(paginas_pdf[anotacao_encontrada.pagina - 1], anotacao_encontrada.coordenadas, f'{path.name}/{anotacao_encontrada.pagina}_{anotacao_encontrada.numero}.pdf')
-
-    print("Terminou de cortar")
-
-    with concurrent.futures.ThreadPoolExecutor(2) as pool:
-        futures = [pool.submit(extrair_texto, anotacao, path.name) for anotacao in anotacoes_encontradas]
-        concurrent.futures.wait(futures)
-
-    """"
-    for anotacao_encontrada in anotacoes_encontradas:
-        extrair_texto(anotacao_encontrada, path.name)
-    """
-
     print("Terminou de extrair o texto")
 
     for anotacao_encontrada in anotacoes_encontradas:
@@ -126,3 +91,5 @@ def extrair(caminho_arquivo_entrada, caminho_arquivo_saida):
         arquivo_saida.write(f"{anotacao_encontrada.texto}\n")
 
     print("Terminou de escrever anotações")
+
+extrair('arquivos_teste/teste1.pdf', 'anotacoes.txt')
