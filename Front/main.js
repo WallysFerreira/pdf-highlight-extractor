@@ -40,7 +40,7 @@ inputFile.addEventListener("change", function (e) {
       const fd = new FormData();
       fd.append('entrada.PDF', inputFile.files[0]); // carregamento aqui 
 
-      let res = await fetch('http://54.94.49.204/extract', {
+      let res = await fetch('http://pdf-highlight-extractor-api.onrender.com/extract', {
           method: 'POST',
           body: fd
       });
